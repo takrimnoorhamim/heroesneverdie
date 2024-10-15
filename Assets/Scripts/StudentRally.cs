@@ -15,7 +15,6 @@ public class StudentRally : MonoBehaviour
 
     private List<Transform> activeStudents = new List<Transform>();
     private List<Transform> inactiveStudents = new List<Transform>();
-    private int acquiredCount = 0;
     private const int maxStudents = 150;
 
     public GameObject revivalButton;
@@ -29,6 +28,9 @@ public class StudentRally : MonoBehaviour
     {
         MoveStudents();
         UpdateRevivalButton();
+
+        // Debugging: Log counts every frame
+        Debug.Log($"Active Students: {activeStudents.Count}");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -51,22 +53,22 @@ public class StudentRally : MonoBehaviour
         activeStudents.Add(student);
         student.GetComponent<Collider2D>().enabled = true;
         student.gameObject.tag = "AcquiredStudent";
-        acquiredCount++;
+        Debug.Log($"Student added. Active count: {activeStudents.Count}");
     }
 
     public void DeactivateStudent(Transform student)
     {
-        activeStudents.Remove(student);
-        inactiveStudents.Add(student);
-
-        if (acquiredCount > 0)
+        if (activeStudents.Remove(student))
         {
-            acquiredCount--; // Decrease the acquired count when a student is deactivated
-
+            inactiveStudents.Add(student);
+            Debug.Log($"Student deactivated. Active count: {activeStudents.Count}");
+            StartCoroutine(FadeOutStudent(student));
+            RearrangeStudents();
         }
-
-        StartCoroutine(FadeOutStudent(student));
-        RearrangeStudents();
+        else
+        {
+            Debug.LogWarning("Attempted to deactivate a student that wasn't in the active list.");
+        }
     }
 
     IEnumerator FadeOutStudent(Transform student)
@@ -162,7 +164,7 @@ public class StudentRally : MonoBehaviour
 
     public int GetAcquiredStudentCount()
     {
-        return acquiredCount;
+        return activeStudents.Count;
     }
 
     void UpdateRevivalButton()
@@ -174,7 +176,6 @@ public class StudentRally : MonoBehaviour
             float opacity = Mathf.Min(1f, inactiveStudents.Count * 0.1f);
             buttonImage.color = new Color(buttonImage.color.r, buttonImage.color.g, buttonImage.color.b, opacity);
 
-            // Button ke disable kore rakha hocche jotokhon na opacity 1 hocche
             Button button = revivalButton.GetComponent<Button>();
             button.interactable = (opacity >= 1f);
         }

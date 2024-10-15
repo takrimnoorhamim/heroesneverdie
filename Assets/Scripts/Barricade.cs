@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class Barricade : MonoBehaviour
 {
     private StudentRally studentRally;
+    public int barricatePower;
 
     void Start()
     {
@@ -14,8 +15,8 @@ public class Barricade : MonoBehaviour
     // Check for collision
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Only destroy if the collider is tagged as "AcquiredStudent" and the count is 30
-        if (collision.gameObject.CompareTag("AcquiredStudent") && studentRally.GetAcquiredStudentCount() >= 30)
+        // Only destroy if the collider is tagged as "AcquiredStudent" and the count is barricatePower
+        if (collision.gameObject.CompareTag("AcquiredStudent") && studentRally.GetAcquiredStudentCount() >= barricatePower)
         {
             Destroy(this.gameObject); // Destroy the barricade
         }      
