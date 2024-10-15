@@ -58,7 +58,13 @@ public class StudentRally : MonoBehaviour
     {
         activeStudents.Remove(student);
         inactiveStudents.Add(student);
-        acquiredCount--; // Decrease the acquired count when a student is deactivated
+
+        if (acquiredCount > 0)
+        {
+            acquiredCount--; // Decrease the acquired count when a student is deactivated
+
+        }
+
         StartCoroutine(FadeOutStudent(student));
         RearrangeStudents();
     }
