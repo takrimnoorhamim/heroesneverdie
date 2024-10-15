@@ -30,7 +30,7 @@ public class StudentRally : MonoBehaviour
         UpdateRevivalButton();
 
         // Debugging: Log counts every frame
-        Debug.Log($"Active Students: {activeStudents.Count}");
+      //  Debug.Log($"Active Students: {activeStudents.Count}");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
