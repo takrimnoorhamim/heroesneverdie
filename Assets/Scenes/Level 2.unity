@@ -4271,7 +4271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barricatePower: 2
-  levelNumber: 1
+  levelNumber: 2
   destructionEffectPrefab: {fileID: 0}
   hitSound: {fileID: 0}
   destroySound: {fileID: 0}
