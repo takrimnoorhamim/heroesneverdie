@@ -5,6 +5,7 @@ public class ActivateGameObject : MonoBehaviour
 {
     public GameObject targetObject; // The GameObject to activate
     private Button button;
+    public GameObject Logos;
 
     void Start()
     {
@@ -17,5 +18,6 @@ public class ActivateGameObject : MonoBehaviour
     {
         // Activate the target GameObject
         targetObject.SetActive(true);
+        Logos.SetActive(false);
     }
 }

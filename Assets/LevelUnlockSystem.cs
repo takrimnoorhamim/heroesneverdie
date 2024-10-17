@@ -25,22 +25,35 @@ public class LevelUnlockSystem : MonoBehaviour
             int levelNumber = i + 1;
             bool isUnlocked = PlayerPrefs.GetInt($"Level{levelNumber}Unlocked", 0) == 1;
             levelButtons[i].interactable = isUnlocked;
-
-            // Optional: Update button appearance based on unlock status
             UpdateButtonAppearance(levelButtons[i], isUnlocked);
         }
     }
 
     private void UpdateButtonAppearance(Button button, bool isUnlocked)
     {
-        // You can customize this method to change the button's appearance
-        // For example, changing the color or adding a lock icon
-        ColorBlock colors = button.colors;
-        colors.normalColor = isUnlocked ? Color.white : Color.gray;
-        button.colors = colors;
+        Image buttonImage = button.GetComponent<Image>();
+        if (buttonImage != null)
+        {
+            if (!isUnlocked)
+            {
+                Color imageColor = buttonImage.color;
+                imageColor.a = 0.8f; // Set opacity to 80% for locked levels
+                buttonImage.color = imageColor;
+            }
+            // Unlocked levels remain unchanged
+        }
+
+        // Optional: Change text color for locked levels
+        Text buttonText = button.GetComponentInChildren<Text>();
+        if (buttonText != null && !isUnlocked)
+        {
+            buttonText.color = Color.gray;
+        }
+
+        // Update interactability
+        button.interactable = isUnlocked;
     }
 
-    // Call this method when a level is completed to unlock the next level
     public void UnlockNextLevel(int completedLevelNumber)
     {
         int nextLevel = completedLevelNumber + 1;
@@ -49,10 +62,8 @@ public class LevelUnlockSystem : MonoBehaviour
         UpdateLevelButtons();
     }
 
-    // Method to load a level when its button is clicked
     public void LoadLevel(int levelNumber)
     {
-        // Implement your level loading logic here
         Debug.Log($"Loading Level {levelNumber}");
         // Example: SceneManagement.LoadScene($"Level{levelNumber}");
     }
