@@ -15,7 +15,7 @@ public class StudentRally : MonoBehaviour
 
     private List<Transform> activeStudents = new List<Transform>();
     private List<Transform> inactiveStudents = new List<Transform>();
-    private const int maxStudents = 60;
+    private int maxStudents = 1000;
 
     public GameObject revivalButton;
 
