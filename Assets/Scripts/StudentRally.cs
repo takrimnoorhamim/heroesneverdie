@@ -173,7 +173,7 @@ public class StudentRally : MonoBehaviour
         {
             revivalButton.SetActive(true);
             Image buttonImage = revivalButton.GetComponent<Image>();
-            float opacity = Mathf.Min(1f, inactiveStudents.Count * 0.1f);
+            float opacity = Mathf.Min(1f, inactiveStudents.Count * 0.2f);
             buttonImage.color = new Color(buttonImage.color.r, buttonImage.color.g, buttonImage.color.b, opacity);
 
             Button button = revivalButton.GetComponent<Button>();
