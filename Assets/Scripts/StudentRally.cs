@@ -11,11 +11,11 @@ public class StudentRally : MonoBehaviour
     public float playerGap = 2f;
     public float gapMultiplier = 1f;
 
-    public int studentsInALine = 5;
+    public int studentsInALine = 3;
 
     private List<Transform> activeStudents = new List<Transform>();
     private List<Transform> inactiveStudents = new List<Transform>();
-    private const int maxStudents = 150;
+    private const int maxStudents = 60;
 
     public GameObject revivalButton;
 

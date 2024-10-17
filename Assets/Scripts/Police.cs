@@ -3,7 +3,7 @@ using UnityEngine;
 public class Police : MonoBehaviour
 {
     public GameObject bulletPrefab;  // Bullet to be shot
-    public Transform shootPoint;  // Where the bullet is fired from
+    public Transform[] spawnPoints;  // Array of possible spawn points
     public float fireRate = 2f;  // Time between shots
     private float fireTimer = 0f;
 
@@ -20,7 +20,11 @@ public class Police : MonoBehaviour
 
     void Shoot()
     {
-        // Instantiate a bullet at the shootPoint position and direction
-        Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
+        // Choose a random spawn point
+        int randomIndex = Random.Range(0, spawnPoints.Length);
+        Transform randomSpawnPoint = spawnPoints[randomIndex];
+
+        // Instantiate a bullet at the random spawn point's position and rotation
+        Instantiate(bulletPrefab, randomSpawnPoint.position, randomSpawnPoint.rotation);
     }
 }

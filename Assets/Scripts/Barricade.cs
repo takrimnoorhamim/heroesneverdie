@@ -40,6 +40,15 @@ public class Barricade : MonoBehaviour
                 audioSource.PlayOneShot(hitSound);
             }
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        } 
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Leader") && studentRally.GetAcquiredStudentCount() == 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
