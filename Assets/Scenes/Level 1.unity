@@ -13401,7 +13401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4264151, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13492,7 +13492,7 @@ MonoBehaviour:
   - {fileID: 543805722}
   - {fileID: 1137875645}
   - {fileID: 647979436}
-  fireRate: 8.19
+  fireRate: 3
   shootClip: {fileID: 8300000, guid: f7fa7fb48d14bc549a6b6eacba1f6050, type: 3}
   audioSource: {fileID: 519420034}
 --- !u!4 &514067911 stripped
@@ -39676,7 +39676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e0136a09ed9fe489db6f0782336e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barricatePower: 10
+  barricatePower: 60
   levelNumber: 1
   destructionEffectPrefab: {fileID: 139366, guid: b185c1a9cf067374586d095111b15bd1, type: 3}
   hitSound: {fileID: 0}
