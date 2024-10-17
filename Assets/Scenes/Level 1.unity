@@ -18558,7 +18558,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Congrats you broke the barricate!!
+  m_text: Congrats you broke the barricade!!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 961a2ff0586a7174982398c54f5748fd, type: 2}
   m_sharedMaterial: {fileID: 5216645250587031512, guid: 961a2ff0586a7174982398c54f5748fd, type: 2}
