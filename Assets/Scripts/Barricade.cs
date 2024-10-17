@@ -6,29 +6,19 @@ public class Barricade : MonoBehaviour
     private StudentRally studentRally;
     public int barricatePower;
     public int levelNumber;
-
     [SerializeField] private GameObject destructionEffectPrefab;
     [SerializeField] private AudioClip hitSound;
     [SerializeField] private AudioClip destroySound;
-
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     void Start()
     {
-        // Reference the StudentRally component to get the acquired student count
         studentRally = FindObjectOfType<StudentRally>();
 
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
     }
 
-    // Check for collision
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Only destroy if the collider is tagged as "AcquiredStudent" and the count is barricatePower
         if (collision.gameObject.CompareTag("AcquiredStudent") && studentRally.GetAcquiredStudentCount() >= barricatePower)
         {
             DestroyBarricade();
@@ -40,8 +30,7 @@ public class Barricade : MonoBehaviour
                 audioSource.PlayOneShot(hitSound);
             }
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        } 
-
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,21 +43,61 @@ public class Barricade : MonoBehaviour
 
     private void DestroyBarricade()
     {
-        if (destructionEffectPrefab != null)
+        // Create a new GameObject to handle the destruction effects
+        GameObject destructionHandler = new GameObject("DestructionHandler");
+        DestructionHandler handler = destructionHandler.AddComponent<DestructionHandler>();
+
+        // Pass necessary information to the handler
+        handler.Initialize(destructionEffectPrefab, destroySound, transform.position, levelNumber);
+
+        // Destroy the barricade
+        Destroy(gameObject);
+    }
+}
+
+public class DestructionHandler : MonoBehaviour
+{
+    private GameObject effectPrefab;
+    private AudioClip destroySound;
+    private Vector3 position;
+    private int levelNumber;
+
+    public void Initialize(GameObject effectPrefab, AudioClip destroySound, Vector3 position, int levelNumber)
+    {
+        this.effectPrefab = effectPrefab;
+        this.destroySound = destroySound;
+        this.position = position;
+        this.levelNumber = levelNumber;
+
+        // Start the destruction sequence
+        StartCoroutine(DestructionSequence());
+    }
+
+    private System.Collections.IEnumerator DestructionSequence()
+    {
+        // Play the explosion effect
+        if (effectPrefab != null)
         {
-            Instantiate(destructionEffectPrefab, transform.position, Quaternion.identity);
+            Instantiate(effectPrefab, position, Quaternion.identity);
         }
 
+        // Play the destroy sound
         if (destroySound != null)
         {
-            AudioSource.PlayClipAtPoint(destroySound, transform.position);
+            AudioSource.PlayClipAtPoint(destroySound, position);
         }
 
         // Unlock the next level
         PlayerPrefs.SetInt($"Level{levelNumber + 1}Unlocked", 1);
         PlayerPrefs.Save();
 
-        // Destroy the barricade
+        // Wait for the sound to finish playing
+        if (destroySound != null)
+        {
+            yield return new WaitForSeconds(destroySound.length);
+        }
+
+        // Destroy this handler object
         Destroy(gameObject);
     }
 }
