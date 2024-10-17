@@ -7,6 +7,14 @@ public class Police : MonoBehaviour
     public float fireRate = 2f;  // Time between shots
     private float fireTimer = 0f;
 
+    public AudioClip shootClip;  // Reference to the audio clip to be played
+    public AudioSource audioSource;  // Reference to the AudioSource
+
+    void Start()
+    {
+        
+    }
+
     void Update()
     {
         // Shoot bullets at intervals
@@ -26,5 +34,11 @@ public class Police : MonoBehaviour
 
         // Instantiate a bullet at the random spawn point's position and rotation
         Instantiate(bulletPrefab, randomSpawnPoint.position, randomSpawnPoint.rotation);
+
+        // Play the audio clip
+        if (audioSource != null && shootClip != null)
+        {
+            audioSource.PlayOneShot(shootClip);
+        }
     }
 }
