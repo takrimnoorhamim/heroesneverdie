@@ -13576,7 +13576,7 @@ MonoBehaviour:
   - {fileID: 543805722}
   - {fileID: 1137875645}
   - {fileID: 647979436}
-  fireRate: 8.19
+  fireRate: 2
   shootClip: {fileID: 8300000, guid: f7fa7fb48d14bc549a6b6eacba1f6050, type: 3}
   audioSource: {fileID: 519420034}
 --- !u!4 &514067911 stripped
@@ -25601,7 +25601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &951891319
 Transform:
   m_ObjectHideFlags: 0
@@ -39844,7 +39844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e0136a09ed9fe489db6f0782336e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barricatePower: 10
+  barricatePower: 100
   levelNumber: 1
   destructionEffectPrefab: {fileID: 139366, guid: b185c1a9cf067374586d095111b15bd1, type: 3}
   hitSound: {fileID: 0}
@@ -55114,7 +55114,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 12
+  m_SortingOrder: 16
   m_Sprite: {fileID: 21300000, guid: 5a34a8d161b59eb4aa7f3856d5bc98da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
